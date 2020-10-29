@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>tga.wks</groupId>
+    <artifactId>wicket-kotlin-seed</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <name>Wicket + Kotlin seed project</name>
+
+    <properties>
+        <main.class>tga.wks.StartKt</main.class>
+
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <kotlin.version>1.4.10</kotlin.version>
+        <kotlin.code.style>official</kotlin.code.style>
+
+        <logback.version>1.2.3</logback.version>
+
+        <wicket.version>9.1.0</wicket.version>
+        <jetty9.version>9.4.31.v20200723</jetty9.version>
+        <slf4j.version>1.7.25</slf4j.version>
+
+        <junit.version>4.12</junit.version>
+        <mockk.version>1.9.3</mockk.version>
+
+        <!-- allowed values: R7, 1.0, 1.5, 2.0 or none -->
+        <wtp.version>none</wtp.version>
+    </properties>
+
+    <dependencies>
+        <dependency> <artifactId>kotlin-stdlib</artifactId>   <version>${kotlin.version}</version>  <groupId>org.jetbrains.kotlin</groupId> </dependency>
+        <dependency> <artifactId>logback-classic</artifactId> <version>${logback.version}</version> <groupId>ch.qos.logback</groupId>       </dependency>
+
+        <!--  WICKET DEPENDENCIES -->
+        <dependency> <artifactId>wicket-core</artifactId>       <groupId>org.apache.wicket</groupId> <version>${wicket.version}</version> </dependency>
+        <dependency> <artifactId>wicket-auth-roles</artifactId> <groupId>org.apache.wicket</groupId> <version>${wicket.version}</version> </dependency>
+
+        <!-- WICKET OPTIONAL DEPENDENCY
+        <dependency> <artifactId>wicket-extensions</artifactId> <version>${wicket.version}</version> <groupId>org.apache.wicket</groupId> </dependency>
+        -->
+
+        <!--  JETTY DEPENDENCIES  -->
+        <dependency> <artifactId>jetty-webapp</artifactId> <version>${jetty9.version}</version> <groupId>org.eclipse.jetty</groupId> </dependency>
+        <dependency> <artifactId>jetty-jmx</artifactId>    <version>${jetty9.version}</version> <groupId>org.eclipse.jetty</groupId> </dependency>
+        <!-- uncomment if WebSocket support is needed
+        <dependency> <artifactId>javax-websocket-server-impl</artifactId> <version>${jetty9.version}</version> <groupId>org.eclipse.jetty.websocket</groupId> </dependency>
+        -->
+
+        <dependency> <artifactId>kotlin-test-junit</artifactId> <groupId>org.jetbrains.kotlin</groupId> <version>${kotlin.version}</version> <scope>test</scope> </dependency>
+        <dependency> <artifactId>junit</artifactId>             <groupId>junit</groupId>                <version>${junit.version}</version>  <scope>test</scope> </dependency>
+        <dependency> <artifactId>mockk</artifactId>             <groupId>io.mockk</groupId>             <version>${mockk.version}</version>  <scope>test</scope> </dependency>
+    </dependencies>
+
+    <build>
+        <sourceDirectory>src/main/kotlin</sourceDirectory>
+        <testSourceDirectory>src/test/kotlin</testSourceDirectory>
+
+        <resources>
+            <resource>
+                <filtering>false</filtering>
+                <directory>src/main/resources</directory>
+            </resource>
+            <resource>
+                <filtering>false</filtering>
+                <directory>src/main/kotlin</directory>
+                <includes>
+                    <include>**</include>
+                </includes>
+                <excludes>
+                    <exclude>**/*.kt</exclude>
+                </excludes>
+            </resource>
+        </resources>
+        <testResources>
+            <testResource>
+                <filtering>false</filtering>
+                <directory>src/test/resources</directory>
+            </testResource>
+            <testResource>
+                <filtering>false</filtering>
+                <directory>src/test/kotlin</directory>
+                <includes>
+                    <include>**</include>
+                </includes>
+                <excludes>
+                    <exclude>**/*.kt</exclude>
+                </excludes>
+            </testResource>
+        </testResources>
+
+        <plugins>
+            <!-- Kotlin Compiler -->
+            <plugin>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <artifactId>kotlin-maven-plugin</artifactId>
+                <version>${kotlin.version}</version>
+
+                <executions>
+                    <execution>
+                        <id>compile</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>test-compile</id>
+                        <phase>test-compile</phase>
+                        <goals>
+                            <goal>test-compile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- build runnable jar -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>2.6</version>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals> <goal>single</goal> </goals>
+                        <configuration>
+                            <archive>
+                                <manifest>
+                                    <mainClass>${main.class}</mainClass>
+                                </manifest>
+                            </archive>
+                            <descriptorRefs>
+                                <descriptorRef>jar-with-dependencies</descriptorRef>
+                            </descriptorRefs>
+<!--                            <finalName>sync-folder</finalName>-->
+<!--                            <appendAssemblyId>false</appendAssemblyId>-->
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+        </plugins>
+    </build>
+
+</project>
