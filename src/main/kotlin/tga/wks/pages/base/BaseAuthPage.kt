@@ -1,20 +1,13 @@
 package tga.wks.pages.base
 
-import org.apache.wicket.markup.html.WebPage
-import org.apache.wicket.markup.html.basic.Label
 import org.apache.wicket.request.mapper.parameter.PageParameters
 import tga.wks.WicketApplication
 import tga.wks.auth.UserWebSession
 
-open class BaseAuthPage(parameters: PageParameters) : WebPage(parameters) {
+open class BaseAuthPage(parameters: PageParameters) : BasePage(parameters) {
 
     companion object {
         @JvmStatic private val serialVersionUID: Long = 1L
-    }
-
-    init {
-        add( Label( "userName", UserWebSession.get().userName) )
-        add( Label( "roles", UserWebSession.get().userRoles?.toString()) )
     }
 
     override fun onConfigure() {

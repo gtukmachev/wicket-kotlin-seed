@@ -8,7 +8,7 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>Wicket + Kotlin seed project</name>
+    <name>[Wicket + Kotlin + Bootstrap] seed project</name>
 
     <properties>
         <main.class>tga.wks.StartKt</main.class>

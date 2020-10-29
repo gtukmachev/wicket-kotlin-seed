@@ -5,7 +5,6 @@ import org.apache.wicket.authroles.authentication.AuthenticatedWebApplication
 import org.apache.wicket.authroles.authentication.pages.SignInPage
 import tga.wks.auth.UserWebSession
 import tga.wks.jetty.JettyRunner
-import tga.wks.pages.base.BaseAuthPage
 import tga.wks.pages.home.HomePage
 import tga.wks.pages.landing.LandingPage
 
@@ -15,8 +14,6 @@ class WicketApplication : AuthenticatedWebApplication() {
         super.init()
         cspSettings.blocking().disabled()
 
-        // add your configuration here
-        mountPage("/base", BaseAuthPage::class.java)
         mountPage("/landing", LandingPage::class.java)
         mountPage("/home", HomePage::class.java)
     }
