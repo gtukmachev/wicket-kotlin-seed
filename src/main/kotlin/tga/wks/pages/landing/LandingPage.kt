@@ -17,7 +17,6 @@ class LandingPage(parameters: PageParameters) : BasePage(parameters) {
 	init {
 		add( PageLink("homePageBtn", HomePage::class) )
 		add( Label("version", application.frameworkSettings.version))
-
 		add(
 			ClickLink("counterBtn"){ counter++ }.apply {
 				add(Label("counterValue"){ counter })
