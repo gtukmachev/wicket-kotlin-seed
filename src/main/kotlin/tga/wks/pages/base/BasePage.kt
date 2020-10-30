@@ -6,8 +6,11 @@ import org.apache.wicket.markup.html.basic.Label
 import org.apache.wicket.markup.html.link.Link
 import org.apache.wicket.request.mapper.parameter.PageParameters
 import tga.wks.auth.UserWebSession
+import tga.wks.components.bootstrap.PageNavItem
 import tga.wks.components.links.PageLink
 import tga.wks.pages.home.HomePage
+import tga.wks.pages.page_one.PageOne
+import tga.wks.pages.page_two.PageTwo
 
 open class BasePage(parameters: PageParameters) : WebPage(parameters) {
 
@@ -19,7 +22,17 @@ open class BasePage(parameters: PageParameters) : WebPage(parameters) {
     var userNavItem: WebMarkupContainer
 
      init {
-        add( PageLink("homePageLink", HomePage::class) )
+         add( PageNavItem("pageHomeNavItem", HomePage::class).apply{
+             add( PageLink("pageHomeNavLink", HomePage::class) )
+         })
+
+         add( PageNavItem("pageOneNavItem", PageOne::class).apply{
+             add( PageLink("pageOneNavLink", PageOne::class) )
+         })
+
+         add( PageNavItem("pageTwoNavItem", PageTwo::class).apply{
+             add( PageLink("pageTwoNavLink", PageTwo::class) )
+         })
 
         userNavItem = WebMarkupContainer("userNavItem")
         add(userNavItem)
@@ -31,7 +44,6 @@ open class BasePage(parameters: PageParameters) : WebPage(parameters) {
                 }
             }
         }
-
         userNavItem.add(signOutNavBtn)
 
         signOutNavBtn.add( Label("userName"){ session.userName!! })

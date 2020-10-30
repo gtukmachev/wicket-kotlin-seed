@@ -7,6 +7,8 @@ import tga.wks.auth.UserWebSession
 import tga.wks.jetty.JettyRunner
 import tga.wks.pages.home.HomePage
 import tga.wks.pages.landing.LandingPage
+import tga.wks.pages.page_one.PageOne
+import tga.wks.pages.page_two.PageTwo
 
 class WicketApplication : AuthenticatedWebApplication() {
 
@@ -16,6 +18,8 @@ class WicketApplication : AuthenticatedWebApplication() {
 
         mountPage("/landing", LandingPage::class.java)
         mountPage("/home", HomePage::class.java)
+        mountPage("/one", PageOne::class.java)
+        mountPage("/two", PageTwo::class.java)
     }
 
     override fun getHomePage() = LandingPage::class.java
